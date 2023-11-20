@@ -10,5 +10,5 @@ import lombok.*;
 public class ReceivePlantilla {
     private int id;
     private String nombre;
-    private String contenido;
+    private String url;
 }

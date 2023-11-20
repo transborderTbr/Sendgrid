@@ -39,12 +39,12 @@ public class EmailService {
         // send the single email
         sendEmail(mail);
     }
-    public void sendBulkEmails(ReceiveActiveMq receiveActiveMq, ReceivePlantilla plantilla) {
+    public void sendBulkEmails(ReceiveActiveMq receiveActiveMq, String plantilla) {
         // specify the email details
         Mail mail = new Mail();
         mail.setFrom(new Email(this.fromEmail));
         mail.setSubject(receiveActiveMq.getSubject());
-        mail.addContent(new Content("text/html", plantilla.getContenido()));
+        mail.addContent(new Content("text/html", plantilla));
 
         // add the multiple recipients to the email
         Personalization personalization = new Personalization();

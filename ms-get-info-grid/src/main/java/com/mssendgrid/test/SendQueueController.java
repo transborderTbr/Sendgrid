@@ -27,7 +27,7 @@ public class SendQueueController {
 
     @PostMapping(path = "/sendQueue")
     public ResponseEntity<Object> sendQueueInfo(@RequestBody DataInfoDTO dataQueue) throws JsonProcessingException {
-        dataQueue.setTemplate(getNameTemplate(URL_GET_TEMPLATE_NAME));
+//        dataQueue.setTemplate(getNameTemplate(URL_GET_TEMPLATE_NAME));
         messageAutoTask.sendMessage(dataQueue);
         return new ResponseEntity<>(
                 dataQueue,
