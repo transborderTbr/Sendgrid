@@ -4,5 +4,7 @@ import lombok.Data;
 
 @Data
 public class TempaltesDTO {
-    private String nameTemplate;
+    private Long id;
+    private String nombre;
+    private String contenido;
 }

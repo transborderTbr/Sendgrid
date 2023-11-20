@@ -4,17 +4,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mssendgrid.test.DTO.DataInfoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.core.JmsTemplate;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-@EnableScheduling
 @Service
 public class MessageAutoTask {
 
@@ -23,7 +17,9 @@ public class MessageAutoTask {
     private final String cc = "cc";
     private final String params = "params";
     private final String template = "template";
-    private final String QUEUE = "queue.sendgrid.transborder";
+
+    @Value("${queue}")
+    private String QUEUE;
 
     @Autowired
     private JmsTemplate jmsTemplate;
