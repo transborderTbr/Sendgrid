@@ -1,18 +1,12 @@
 package com.SendPlantillas.Plantillas.Controller;
 
 import com.SendPlantillas.Plantillas.ControllerImpl.PlantillaControllerImpl;
-import com.SendPlantillas.Plantillas.DTO.DataPlantillaDTO;
 import com.SendPlantillas.Plantillas.DTO.PlantillaDto;
 import com.SendPlantillas.Plantillas.Entity.PlantillaEntity;
 import com.SendPlantillas.Plantillas.Repository.PlantillaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.*;
-import java.net.URL;
-import java.net.URLConnection;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,9 +23,9 @@ public class PlantillaController implements PlantillaControllerImpl {
     }
 
     @Override
-    public PlantillaDto getPlantillaByName(String name, DataPlantillaDTO dataPlantillaDTO) {
+    public PlantillaDto getPlantillaByName(String name) {
         PlantillaEntity entities = plantillaRepository.findByNombre(name);
-        return MapEntityToDto(entities,dataPlantillaDTO);
+        return MapEntityToDto(entities);
     }
 
     @Override
@@ -47,17 +41,17 @@ public class PlantillaController implements PlantillaControllerImpl {
             PlantillaDto dto = new PlantillaDto();
             dto.setId(plantillaEntity.get(i).getId());
             dto.setNombre(plantillaEntity.get(i).getNombre());
-            dto.setContenido(plantillaEntity.get(i).getContenido());
+            dto.setUrl(plantillaEntity.get(i).getUrl());
             plantillaDto.add(dto);
         }
         return plantillaDto;
     }
 
-    private PlantillaDto MapEntityToDto(PlantillaEntity plantillaEntity,DataPlantillaDTO dataPlantillaDTO) {
+    private PlantillaDto MapEntityToDto(PlantillaEntity plantillaEntity) {
         PlantillaDto dto = new PlantillaDto();
         dto.setId(plantillaEntity.getId());
         dto.setNombre(plantillaEntity.getNombre());
-        dto.setContenido(LeerPlantilla(plantillaEntity.getContenido(),dataPlantillaDTO));
+        dto.setUrl(plantillaEntity.getUrl());
         return dto;
     }
 
@@ -65,17 +59,13 @@ public class PlantillaController implements PlantillaControllerImpl {
         PlantillaEntity paisEntity = new PlantillaEntity();
         if (id==0){
             paisEntity.setNombre(paisDto.getNombre());
-            paisEntity.setContenido(paisDto.getContenido());
+            paisEntity.setUrl(paisDto.getUrl());
         }else{
             paisEntity.setId(id);
             paisEntity.setNombre(paisDto.getNombre());
-            paisEntity.setContenido(paisDto.getContenido());
+            paisEntity.setUrl(paisDto.getUrl());
         }
         return paisEntity;
-    }
-
-    private String LeerPlantilla(String contenidoBD,DataPlantillaDTO dataPlantillaDTO){
-        return contenidoBD.replace("@Name",dataPlantillaDTO.getName());
     }
 
 }

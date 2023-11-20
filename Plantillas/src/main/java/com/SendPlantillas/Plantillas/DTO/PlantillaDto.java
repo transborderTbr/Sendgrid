@@ -11,6 +11,6 @@ public class PlantillaDto implements Serializable {
 
     private Long id;
     private String nombre;
-    private String contenido;
+    private String url;
 
 }

@@ -1,13 +1,11 @@
 package com.SendPlantillas.Plantillas.Service;
 
 import com.SendPlantillas.Plantillas.ControllerImpl.PlantillaControllerImpl;
-import com.SendPlantillas.Plantillas.DTO.DataPlantillaDTO;
 import com.SendPlantillas.Plantillas.DTO.PlantillaDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -22,9 +20,9 @@ public class PlantillasService {
         return plantillaController.getPlantillas();
     }
 
-    @PostMapping("/{nombre}")
-    public @ResponseBody PlantillaDto getPlantillas(@PathVariable(value = "nombre") String nombre,@RequestBody DataPlantillaDTO dataPlantillaDTO) {
-        return plantillaController.getPlantillaByName(nombre,dataPlantillaDTO);
+    @GetMapping("/{nombre}")
+    public @ResponseBody PlantillaDto getPlantillasByName(@PathVariable(value = "nombre") String nombre) {
+        return plantillaController.getPlantillaByName(nombre);
     }
 
     @PostMapping(consumes = "application/json",produces = "application/json")
