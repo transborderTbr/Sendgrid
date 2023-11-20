@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface PlantillaRepository extends JpaRepository<PlantillaEntity,Long> {
 
-    @Query(value = "select * from plantilla where nombre LIKE %?1%", nativeQuery = true)
+    @Query(value = "select * from plantilla where nombre LIKE %?1% limit 1", nativeQuery = true)
     PlantillaEntity findByNombre(String name);
 
 }
