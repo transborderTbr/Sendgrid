@@ -9,11 +9,14 @@ import com.sendgrid.helpers.mail.objects.Content;
 import com.sendgrid.helpers.mail.objects.Email;
 import com.sendgrid.helpers.mail.objects.Personalization;
 import com.sendgrid.mcreceivesendgrid.dto.ReceiveActiveMq;
+import com.sendgrid.mcreceivesendgrid.dto.ReceivePlantilla;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -36,19 +39,21 @@ public class EmailService {
         // send the single email
         sendEmail(mail);
     }
-    public void sendBulkEmails(ReceiveActiveMq receiveActiveMq, String plantilla) {
+    public void sendBulkEmails(ReceiveActiveMq receiveActiveMq, ReceivePlantilla plantilla) {
         // specify the email details
         Mail mail = new Mail();
         mail.setFrom(new Email(this.fromEmail));
         mail.setSubject(receiveActiveMq.getSubject());
-        mail.addContent(new Content("text/html", plantilla));
+        mail.addContent(new Content("text/html", plantilla.getContenido()));
 
         // add the multiple recipients to the email
         Personalization personalization = new Personalization();
-        receiveActiveMq.getCc().forEach(to -> {
+//        String data = receiveActiveMq.getCc().replace("[","").replace("]","");
+//        List<String> myList = new ArrayList<>(Arrays.asList(data.split(",")));
+        receiveActiveMq.getCc().forEach(cc -> {
             // add each destination email address to the BCC
             // field of the email
-            personalization.addBcc(new Email(to));
+            personalization.addBcc(new Email(cc));
             personalization.addTo(new Email(receiveActiveMq.getTo()));
             personalization.setSubject(receiveActiveMq.getSubject());
         });

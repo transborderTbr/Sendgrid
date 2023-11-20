@@ -7,8 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ReceivePlantilla {
-    private int id;
-    private String nombre;
-    private String contenido;
+public class Params {
+    private String name;
+    private String city;
 }
