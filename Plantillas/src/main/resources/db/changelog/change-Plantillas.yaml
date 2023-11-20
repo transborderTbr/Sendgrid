@@ -1,0 +1,43 @@
+databaseChangeLog:
+  - changeSet:
+      id: 'createTable-Plantilla'
+      author: BPosada
+      labels: 'Creacion de la tabla plantillas'
+      changes:
+        - createTable:
+            tableName: plantilla
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    autoIncrement: true
+                    nullable: false
+              - column:
+                  name: nombre
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: contenido
+                  type: text
+                  constraints:
+                    nullable: false
+            remarks: 'Tabla que guarda los plantillaes'
+  - changeSet:
+      id: 'addPrimaryKey-Plantilla'
+      author: BPosada
+      labels: 'agregado de la llave primaria'
+      changes:
+        - addPrimaryKey:
+            columnNames: id
+            constraintName: pk_plantilla
+            tableName: plantilla
+            validate: true
+        - addAutoIncrement:
+            columnDataType: int
+            columnName: id
+            defaultOnNull: false
+            incrementBy: 1
+            startWith: 1
+            tableName: plantilla
