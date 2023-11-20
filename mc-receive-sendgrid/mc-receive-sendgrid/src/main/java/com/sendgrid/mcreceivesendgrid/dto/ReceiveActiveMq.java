@@ -14,7 +14,7 @@ public class ReceiveActiveMq {
     private String to;
     private List<String> cc;
     private String subject;
-    private List<Map<String,String>> params;
+    private Map<String,String> params;
     private String template;
     private String from;
 
