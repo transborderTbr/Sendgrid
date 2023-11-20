@@ -1,0 +1,13 @@
+server:
+  port: 8085
+
+spring:
+  sendgrid:
+    api-key: ${API_KEY}
+  activemq:
+    broker-url: tcp://localhost:61616
+    user: admin
+    password: admin
+twilio:
+  sendgrid:
+    from-email: aestrada@transborder.com.co
