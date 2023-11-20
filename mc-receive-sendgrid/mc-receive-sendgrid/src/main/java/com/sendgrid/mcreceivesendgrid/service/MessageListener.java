@@ -31,7 +31,7 @@ public class MessageListener {
         //leer activeMQ
         receiveActiveMq= objectMapper.readValue(message, ReceiveActiveMq.class);
       //  tomar el nombre y consumir api
-        String url = "http://localhost:8083/api/v1/plantilla"+receiveActiveMq.getTemplate();
+        String url = "http://localhost:8082/plantilla/"+receiveActiveMq.getTemplate();
         restTemplate = new RestTemplate();
         Map<String,String> params = new HashMap<>();
         params.put("name", receiveActiveMq.getParams().getName());
