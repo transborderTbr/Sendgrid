@@ -12,5 +12,5 @@ import java.util.Map;
 @Builder
 public class SendPlantilla {
     private String plantilla;
-    private Map<String,String> params;
+    private Params params;
 }

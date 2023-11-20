@@ -9,6 +9,7 @@ import com.sendgrid.helpers.mail.objects.Content;
 import com.sendgrid.helpers.mail.objects.Email;
 import com.sendgrid.helpers.mail.objects.Personalization;
 import com.sendgrid.mcreceivesendgrid.dto.ReceiveActiveMq;
+import com.sendgrid.mcreceivesendgrid.dto.ReceivePlantilla;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -38,12 +39,12 @@ public class EmailService {
         // send the single email
         sendEmail(mail);
     }
-    public void sendBulkEmails(ReceiveActiveMq receiveActiveMq, String plantilla) {
+    public void sendBulkEmails(ReceiveActiveMq receiveActiveMq, ReceivePlantilla plantilla) {
         // specify the email details
         Mail mail = new Mail();
         mail.setFrom(new Email(this.fromEmail));
         mail.setSubject(receiveActiveMq.getSubject());
-        mail.addContent(new Content("text/html", plantilla));
+        mail.addContent(new Content("text/html", plantilla.getContenido()));
 
         // add the multiple recipients to the email
         Personalization personalization = new Personalization();
