@@ -34,24 +34,24 @@ public class MessageListener {
         //leer activeMQ
         receiveActiveMq= objectMapper.readValue(message, ReceiveActiveMq.class);
       //  tomar el nombre y consumir api
-        String url = "http://localhost:8083/api/v1/plantilla";
-        restTemplate = new RestTemplate();
-        SendPlantilla sendPlantilla = SendPlantilla.builder()
-                .plantilla(receiveActiveMq.getTemplate())
-                .params(receiveActiveMq.getParams())
-                .build();
-//
-        ResponseEntity<ReceivePlantilla> receivePlantilla = restTemplate.postForEntity(url, sendPlantilla, ReceivePlantilla.class);
+//        String url = "http://localhost:8083/api/v1/plantilla";
+//        restTemplate = new RestTemplate();
+//        SendPlantilla sendPlantilla = SendPlantilla.builder()
+//                .plantilla(receiveActiveMq.getTemplate())
+//                .params(receiveActiveMq.getParams())
+//                .build();
+////
+//        ResponseEntity<ReceivePlantilla> receivePlantilla = restTemplate.postForEntity(url, sendPlantilla, ReceivePlantilla.class);
 //        receiveActiveMq = ReceiveActiveMq.builder()
 //                .cc(Arrays.asList("jhongrisrod@gmail.com","rangel1998.rt@gmail.com"))
 //                .subject("este es un subject")
 //                .build();
-//        ReceivePlantilla receivePlantilla = ReceivePlantilla.builder()
-//                .content("html")
-//                .build();
-        if (true ){
+        ReceivePlantilla receivePlantilla = ReceivePlantilla.builder()
+                .content("html")
+                .build();
+        if (receivePlantilla!=null ){
         //enviar notificacion
-        emailService.sendBulkEmails(receiveActiveMq,receivePlantilla.getBody().getContent());
+        emailService.sendBulkEmails(receiveActiveMq,receivePlantilla.getContent());
         } else {
             throw new RuntimeException("no se pudo obtener la plantilla");
         }

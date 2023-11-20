@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -45,10 +47,12 @@ public class EmailService {
 
         // add the multiple recipients to the email
         Personalization personalization = new Personalization();
-        receiveActiveMq.getCc().forEach(to -> {
+//        String data = receiveActiveMq.getCc().replace("[","").replace("]","");
+//        List<String> myList = new ArrayList<>(Arrays.asList(data.split(",")));
+        receiveActiveMq.getCc().forEach(cc -> {
             // add each destination email address to the BCC
             // field of the email
-            personalization.addBcc(new Email(to));
+            personalization.addBcc(new Email(cc));
             personalization.addTo(new Email(receiveActiveMq.getTo()));
             personalization.setSubject(receiveActiveMq.getSubject());
         });

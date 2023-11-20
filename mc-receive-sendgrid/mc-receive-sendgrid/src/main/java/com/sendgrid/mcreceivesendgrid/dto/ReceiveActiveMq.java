@@ -1,5 +1,6 @@
 package com.sendgrid.mcreceivesendgrid.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import java.util.List;
@@ -10,11 +11,12 @@ import java.util.Map;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ReceiveActiveMq {
     private String to;
     private List<String> cc;
     private String subject;
-    private Map<String,String> params;
+    private Params params;
     private String template;
     private String from;
 
